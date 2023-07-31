@@ -7,7 +7,7 @@ export async function validateCreateCustomer(req, res, next) {
     try {
         const cpfList = await db.query(`SELECT * FROM customers WHERE cpf = $3;`, [cpf])
 
-        if (!name || isNaN(phone) === false || phone.length !== 10 || phone.length !== 11|| isNaN(cpf) === false || cpf.length !== 11 || dayjs(birthday).isValid() === false) return res.sendStatus(400)
+        if (!name || isNaN(phone) === true || phone.length !== 10 || phone.length !== 11|| isNaN(cpf) === true || cpf.length !== 11 || dayjs(birthday).isValid() === false) return res.sendStatus(400)
 
         if (cpfList.rowCount !== 0) return res.sendStatus(409)
 
