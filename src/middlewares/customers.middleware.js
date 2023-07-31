@@ -6,6 +6,7 @@ export async function validateGetCustomer(req, res, next) {
     try {
         const customer = await db.query(`SELECT * FROM customers WHERE id=$1`, [id])
         if (customer.rowCount === 0) return res.sendStatus(404)
+        
         next()
     } catch (err) {
         res.status(500).send(err.message)

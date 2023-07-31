@@ -1,7 +1,7 @@
 import { db } from "../database/database.js"
 
 export async function validateCreateGame(req, res, next) {
-    const { name, stockTotal, pricePerDay } = req.body
+    const { name } = req.body
 
     try {
         const game = await db.query(`SELECT * FROM games WHERE name = $1;`, [name])
