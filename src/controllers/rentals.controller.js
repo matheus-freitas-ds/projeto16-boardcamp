@@ -46,6 +46,13 @@ export async function createRental(req, res) {
 export async function returnRental(req, res) {
     const { id } = req.params
 
+    try {
+        await db.query(`UPDATE rentals SET "returnDate"=$1, "delayFee"=$2 WHERE id=$3;`, [dayjs().format('YYYY-MM-DD'), id])
+
+        res.sendStatus(200)
+    } catch (err) {
+        res.status(500).send(err.message)
+    }
 }
 
 export async function deleteRental(req, res) {
