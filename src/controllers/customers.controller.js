@@ -13,7 +13,7 @@ export async function getCustomerById(req, res) {
     const { id } = req.params
 
     try {
-        const customer = await db.query(`SELECT * FROM customers WHERE id = $1;`, [id])
+        const customer = await db.query(`SELECT id, name, phone, cpf, TO_CHAR(birthday, 'YYYY-MM-DD') AS birthday FROM customers WHERE id = $1;`, [id])
 
         res.send(customer.rows[0])
     } catch (err) {
