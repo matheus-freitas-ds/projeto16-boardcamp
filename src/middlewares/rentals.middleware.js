@@ -11,8 +11,6 @@ export async function validateRental(req, res, next) {
         const inexistentGame = await db.query(`SELECT * FROM games WHERE id=$1;`, [gameId])
 
         if (inexistentGame.rowCount === 0) return res.sendStatus(400)
-
-        if (daysRented <= 0) return res.sendStatus(400)
     } catch (err) {
         res.status(500).send(err.message)
     }
