@@ -12,6 +12,23 @@ export async function validateGetCustomer(req, res, next) {
     }
 }
 
+export async function validateCustomerCpf(req, res, next) {
+    const { id } = req.params
+    const { cpf } = req.body
+
+    try {
+        const cpfList = await db.query(`SELECT * FROM customers WHERE cpf = $1;`, [cpf])
+
+        if (cpfList.rowCount === 0) return next()
+        
+        if (cpfList.rowCount > 0 && cpfList.rows[0].id === Number(id)) return next()
+
+        return res.sendStatus(409)
+    } catch (err) {
+        res.status(500).send(err.message)
+    }
+}
+
 export async function validateCreateCustomer(req, res, next) {
     const { cpf } = req.body
 
