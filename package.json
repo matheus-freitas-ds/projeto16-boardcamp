@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/matheus-freitas-ds/projeto16-boardcamp#readme",
   "dependencies": {
+    "@joi/date": "^2.1.0",
     "cors": "^2.8.5",
     "dayjs": "^1.11.9",
     "dotenv": "^16.3.1",
