@@ -1,5 +1,17 @@
 import { db } from "../database/database.js"
 
+export async function validateGetCustomer(req, res, next) {
+    const { id } = req.params
+
+    try {
+        const customer = await db.query(`SELECT * FROM customers WHERE id=$1`, [id])
+        if (customer.rowCount === 0) return res.sendStatus(404)
+        next()
+    } catch (err) {
+        res.status(500).send(err.message)
+    }
+}
+
 export async function validateCreateCustomer(req, res, next) {
     const { cpf } = req.body
 
